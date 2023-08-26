@@ -11,9 +11,8 @@ app = Flask(__name__)
 # Load the trained model
 model = load_model('fine_tuned_dog_breed_model.h5')
 
-# Extract unique breeds from labels.csv
-labels_df = pd.read_csv('./dataset/dog-breed-identification/labels.csv')
-class_labels = labels_df['breed'].unique().tolist()
+with open('class_labels.txt', 'r') as f:
+    class_labels = f.read().splitlines()
 
 # Function to preprocess image and predict breed
 def predict_breed(img_path):
