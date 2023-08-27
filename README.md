@@ -53,7 +53,7 @@ pip install -r requirements.txt
      - Move the `train` folder and `labels.csv` file into `dataset/dog-breed-identification`.
 
 6. **Train the Model**
-   - Train the model using `model_train.py` with the dataset in `dataset/dog-breed-identification` (This can take a long time. I suggest you use an online gpu cloud service instead.):
+   - Train the model using `model_train.py` with the dataset in `dataset/dog-breed-identification` (This can take a long time. I suggest you use an online GPU cloud service instead).
    ```
    python model_train.py
    ```
