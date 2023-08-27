@@ -18,12 +18,27 @@ HEADERS = {
     "X-Api-Key": os.getenv("X-API-KEY")
 }
 
+EXPECTED_BREED_KEYS = [
+    "name", "min_life_expectancy", "max_life_expectancy", 
+    "min_height_male", "max_height_male", 
+    "min_height_female", "max_height_female", 
+    "min_weight_male", "max_weight_male", 
+    "min_weight_female", "max_weight_female", 
+    "energy", "trainability", "good_with_children", 
+    "good_with_strangers", "shedding", "grooming", "barking"
+]
+
+
 def get_description(breed):
-    response = requests.get(url=DOGTIME_LINK + breed)
-    soup = BeautifulSoup(response.content, 'html.parser')
-    description_element = soup.find(class_="entry-content")
-    description = description_element.find("p").text
-    return description
+    try:
+        response = requests.get(url=DOGTIME_LINK + breed)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        soup = BeautifulSoup(response.content, 'html.parser')
+        description_element = soup.find(class_="entry-content")
+        description = description_element.find("p").text
+        return description
+    except:
+        return "No description found for this breed."
 
 app = Flask(__name__)
 
@@ -71,19 +86,23 @@ def upload_file():
 
         breed_formatted = breed.replace('_', ' ')
 
-        # Make API request with the predicted breed
-        params = {"name": breed}
-        response = requests.get(url=DOGS_API_ENDPOINT, params=params, headers=HEADERS)
-        breed_info = response.json()[0]
+        try:
+            # Make API request with the predicted breed
+            params = {"name": breed_formatted}
+            response = requests.get(url=DOGS_API_ENDPOINT, params=params, headers=HEADERS)
+            response.raise_for_status()  # Raise an exception for HTTP errors
+            breed_info = response.json()[0]
+        except:
+            breed_info = {key: "Unknown" for key in EXPECTED_BREED_KEYS[1:]}
+            breed_info["name"] = breed_formatted
 
         breed_description = get_description(breed.replace('_', '-'))
 
-        return render_template('result.html', breed=breed, img_path=filename, breed_info=breed_info, breed_description=breed_description)
+        return render_template('result.html', breed=breed_formatted, img_path=filename, breed_info=breed_info, breed_description=breed_description)
     else:
         flash('File not allowed')
         return redirect(url_for('index'))
 
-    
 
 if __name__ == '__main__':
     app.run(debug=True)
