@@ -74,18 +74,6 @@ python app.py
 - Open a web browser and navigate to `http://127.0.0.1:5000/`.
 - Upload a dog image and get the breed prediction!
 
-## API Key Setup
-To fetch additional information about the predicted dog breed, the application uses an external API. You'll need to obtain an API key for this service.
-
-1. Visit [API Ninjas](https://api-ninjas.com/) and sign up for an account.
-2. Once registered, navigate to the API section and look for the 'Dogs' API.
-3. Generate an API key for the Dogs API.
-4. Create a `.env` file in the root directory of the project.
-5. Add the following line to the `.env` file:
-```
-X-API-KEY=YOUR_API_KEY
-```
-Replace `YOUR_API_KEY` with the key you obtained from API Ninjas.
 
 ## About `class_labels.txt`
 The `class_labels.txt` file contains the names of the dog breeds that the model has been trained on. Each line in the file represents a unique breed. This file is used by the application to map the model's predictions to the corresponding breed names.
