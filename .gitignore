@@ -3,6 +3,7 @@
 
 ### Model Data ###
 dataset/
+fine_tuned_dog_breed_model.h5
 
 ### Uploads Folde ###
 static/uploads/
