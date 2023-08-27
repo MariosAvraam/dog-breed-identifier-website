@@ -3,69 +3,60 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-lg-6 offset-lg-3">
-    <h2 class="text-center mb-4">Dog Breed Result</h2>
-    <div class="text-center">
-      <img src="{{ url_for('static', filename='uploads/' + img_path) }}" alt="Uploaded Dog Image" class="img-fluid mb-4 rounded img-display">
+    <div class="col-lg-6 offset-lg-3">
+        <h2 class="text-center mb-4">Dog Breed Result</h2>
+        <div class="text-center">
+            <img src="{{ url_for('static', filename='uploads/' + img_path) }}" alt="Uploaded Dog Image" class="img-fluid mb-4 rounded img-display">
+        </div>
+        <h3 class="text-center mb-4">Predicted Breed: {{ breed.title() }}</h3>
+
+        <!-- Breed Information Table -->
+        <table class="table table-striped table-bordered table-hover">
+            <tbody>
+                <tr class="table-primary">
+                    <td colspan="3" class="text-center"><strong>Name:</strong> {{ breed_info.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Height (Male):</strong> {{ breed_info.min_height_male }} - {{ breed_info.max_height_male }} inches</td>
+                    <td><strong>Height (Female):</strong> {{ breed_info.min_height_female }} - {{ breed_info.max_height_female }} inches</td>
+                </tr>
+                <tr>
+                    <td><strong>Weight (Male):</strong> {{ breed_info.min_weight_male }} - {{ breed_info.max_weight_male }} lbs</td>
+                    <td><strong>Weight (Female):</strong> {{ breed_info.min_weight_female }} - {{ breed_info.max_weight_female }} lbs</td>
+                </tr>
+                <tr class="table-info">
+                    <td colspan="3" class="text-center"><strong>Life Expectancy:</strong> {{ breed_info.min_life_expectancy }} - {{ breed_info.max_life_expectancy }} years</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Energy Level:</strong> {{ breed_info.energy }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Trainability:</strong> {{ breed_info.trainability }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Good with Children:</strong> {{ breed_info.good_with_children }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Good with Strangers:</strong> {{ breed_info.good_with_strangers }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Shedding:</strong> {{ breed_info.shedding }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Grooming:</strong> {{ breed_info.grooming }}/5</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="3" class="text-center"><strong>Barking:</strong> {{ breed_info.barking }}/5</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <h3 class="text-center">Predicted Breed:
-      {{ breed }}
-    </h3>
-  </div>
 </div>
-<!-- Display breed information -->
-<div class="row mt-4">
-  <div class="col-lg-6 offset-lg-3">
-    <h4>About the Breed:</h4>
-    <p><strong>Name:</strong>
-      {{ breed_info.name }}
-    </p>
-    <p><strong>Life Expectancy:</strong>
-      {{ breed_info.min_life_expectancy }} -
-      {{ breed_info.max_life_expectancy }} years
-    </p>
-    <p><strong>Height (Male):</strong>
-      {{ breed_info.min_height_male }} -
-      {{ breed_info.max_height_male }} inches
-    </p>
-    <p><strong>Height (Female):</strong>
-      {{ breed_info.min_height_female }} -
-      {{ breed_info.max_height_female }} inches
-    </p>
-    <p><strong>Weight (Male):</strong>
-      {{ breed_info.min_weight_male }} -
-      {{ breed_info.max_weight_male }} lbs
-    </p>
-    <p><strong>Weight (Female):</strong>
-      {{ breed_info.min_weight_female }} -
-      {{ breed_info.max_weight_female }} lbs
-    </p>
-    <p><strong>Energy Level:</strong>
-      {{ breed_info.energy }}/5
-    </p>
-    <p><strong>Trainability:</strong>
-      {{ breed_info.trainability }}/5
-    </p>
-    <p><strong>Good with Children:</strong>
-      {{ breed_info.good_with_children }}/5
-    </p>
-    <p><strong>Good with Strangers:</strong>
-      {{ breed_info.good_with_strangers }}/5
-    </p>
-    <p><strong>Shedding:</strong>
-      {{ breed_info.shedding }}/5
-    </p>
-    <p><strong>Grooming:</strong>
-      {{ breed_info.grooming }}/5
-    </p>
-    <p><strong>Barking:</strong>
-      {{ breed_info.barking }}/5
-    </p>
-  </div>
+
+<div class="row mt-4 mb-5">
+    <div class="col-lg-6 offset-lg-3 d-grid">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Upload Another Image</a>
+    </div>
 </div>
-<div class="row mt-4">
-  <div class="col-lg-6 offset-lg-3 d-grid">
-    <a href="{{ url_for('index') }}" class="btn btn-secondary">Upload Another Image</a>
-  </div>
-</div>
+
 {% endblock %}
