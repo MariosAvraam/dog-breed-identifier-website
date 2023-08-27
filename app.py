@@ -1,10 +1,21 @@
 import os
 import pandas as pd
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename 
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DOGS_API_ENDPOINT = "https://api.api-ninjas.com/v1/dogs"
+
+HEADERS = {
+    "X-Api-Key": os.getenv("X-API-KEY")
+}
+
 
 app = Flask(__name__)
 
@@ -27,7 +38,7 @@ def predict_breed(img_path):
 def index():
     return render_template('index.html')
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -38,16 +49,29 @@ def allowed_file(filename):
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return 'No file part'
+        flash('No file part')
+        return redirect(url_for('index'))
     file = request.files['file']
     if file.filename == '':
-        return 'No selected file'
+        flash('No selected file')
+        return redirect(url_for('index'))
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        breed = predict_breed(filepath)
-        return breed
+        breed = predict_breed(filepath).replace('_', ' ')
+
+        # Make API request with the predicted breed
+        params = {"name": breed}
+        response = requests.get(url=DOGS_API_ENDPOINT, params=params, headers=HEADERS)
+        breed_info = response.json()[0]
+
+        return render_template('result.html', breed=breed, img_path=filename, breed_info=breed_info)
+    else:
+        flash('File not allowed')
+        return redirect(url_for('index'))
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
