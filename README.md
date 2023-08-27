@@ -87,6 +87,9 @@ X-API-KEY=YOUR_API_KEY
 ```
 Replace `YOUR_API_KEY` with the key you obtained from API Ninjas.
 
+## About `class_labels.txt`
+The `class_labels.txt` file contains the names of the dog breeds that the model has been trained on. Each line in the file represents a unique breed. This file is used by the application to map the model's predictions to the corresponding breed names.
+
 ## Contributing
 Feel free to fork this repository, make changes, and submit pull requests. Any contributions are welcome!
 
