@@ -31,15 +31,41 @@ source venv/bin/activate # On Windows, use venv\Scripts\activate
 4. **Install Dependencies**
 ```
 pip install -r requirements.txt
-
 ```
 
-5. **Train the Model**
-- The application requires a trained model to make predictions. Due to the large size of the model, it's not included in the repository. You'll need to train it yourself.
-- Use the `model_train.py` script to train the model. Ensure you have the required dataset in the `dataset/` directory.
-- Once trained, the model will be saved as `fine_tuned_dog_breed_model.h5`. Copy this file to the root directory of the project.
 
-6. **Run the Application**
+5. **Obtain the Dog Breed Identification Dataset from Kaggle**
+
+   - **Set Up a Kaggle Account**
+     - If you don't already have a Kaggle account, sign up at [Kaggle](https://www.kaggle.com/).
+
+   - **Navigate to the Dataset Page**
+     - Go to the `dog-breed-identification` dataset page on Kaggle: [Dog Breed Identification Dataset](https://www.kaggle.com/c/dog-breed-identification/data).
+
+   - **Download the Dataset**
+     - Click on the `Download` button. This will download a zip file named `dog-breed-identification.zip`.
+
+   - **Extract the Dataset**
+     - Extract the `dog-breed-identification.zip` file to get `train` folder, a `test` folder, and `labels.csv` file.
+
+   - **Place the Dataset in the Project Directory**
+     - Create a `dataset` directory in the project root.
+     - Move the `train` folder and `labels.csv` file into `dataset/`.
+
+6. **Train the Model**
+   - Train the model using `model_train.py` with the dataset in `dataset/`:
+   ```
+   python model_train.py
+   ```
+   - After training, the model, `fine_tuned_dog_breed_model.h5`, will be saved. Move this to the project root.
+
+7. **API Key Setup**
+   - Register at [API Ninjas](https://api-ninjas.com/) for an account.
+   - Navigate to the API section and select the 'Dogs' API to generate an API key.
+   - In the project root, create a `.env` file.
+   - Add to `.env`: `X-API-KEY=YOUR_API_KEY`, replacing `YOUR_API_KEY` with your key from API Ninjas.
+
+8. **Run the Application**
 ```
 python app.py
 ```
@@ -61,7 +87,6 @@ X-API-KEY=YOUR_API_KEY
 ```
 Replace `YOUR_API_KEY` with the key you obtained from API Ninjas.
 
-
 ## Contributing
 Feel free to fork this repository, make changes, and submit pull requests. Any contributions are welcome!
 
@@ -69,6 +94,4 @@ Feel free to fork this repository, make changes, and submit pull requests. Any c
 This project is licensed under the MIT License.
 
 ## Acknowledgements
-Thanks to [Kaggle](https://www.kaggle.com/c/dog-breed-identification) for the dog breed dataset and [DogsAPI](https://api-ninjas.com/api/dogs) for the breed information API."
-
-
+Thanks to [Kaggle](https://www.kaggle.com/c/dog-breed-identification) for the dog breed dataset and [DogsAPI](https://api-ninjas.com/api/dogs) for the breed information API.
