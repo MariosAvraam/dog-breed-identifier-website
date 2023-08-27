@@ -70,7 +70,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-7. **Access the Web Application**
+9. **Access the Web Application**
 - Open a web browser and navigate to `http://127.0.0.1:5000/`.
 - Upload a dog image and get the breed prediction!
 
