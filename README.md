@@ -28,7 +28,7 @@ python -m venv venv
 source venv/bin/activate # On Windows, use venv\Scripts\activate
 ```
 
-4. **Install Dependencies**
+4. **Install Dependencies (This may take a while)**
 ```
 pip install -r requirements.txt
 ```
@@ -46,14 +46,14 @@ pip install -r requirements.txt
      - Click on the `Download` button. This will download a zip file named `dog-breed-identification.zip`.
 
    - **Extract the Dataset**
-     - Extract the `dog-breed-identification.zip` file to get `train` folder, a `test` folder, and `labels.csv` file.
+     - Extract the `dog-breed-identification.zip` file to get a `train` folder and a `labels.csv` file.
 
    - **Place the Dataset in the Project Directory**
-     - Create a `dataset` directory in the project root.
-     - Move the `train` folder and `labels.csv` file into `dataset/`.
+     - Create a `dataset` directory in the project root thas has a subfolder called `dog-breed-identification`.
+     - Move the `train` folder and `labels.csv` file into `dataset/dog-breed-identification`.
 
 6. **Train the Model**
-   - Train the model using `model_train.py` with the dataset in `dataset/`:
+   - Train the model using `model_train.py` with the dataset in `dataset/dog-breed-identification` (This can take a long time. I suggest you use an online gpu cloud service instead.):
    ```
    python model_train.py
    ```
@@ -61,7 +61,7 @@ pip install -r requirements.txt
 
 7. **API Key Setup**
    - Register at [API Ninjas](https://api-ninjas.com/) for an account.
-   - Navigate to the API section and select the 'Dogs' API to generate an API key.
+   - Navigate to your account and generate an API key.
    - In the project root, create a `.env` file.
    - Add to `.env`: `X-API-KEY=YOUR_API_KEY`, replacing `YOUR_API_KEY` with your key from API Ninjas.
 
