@@ -7,15 +7,23 @@ from keras.preprocessing import image
 import numpy as np
 import requests
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 
 load_dotenv()
 
 DOGS_API_ENDPOINT = "https://api.api-ninjas.com/v1/dogs"
+DOGTIME_LINK = "https://dogtime.com/dog-breeds/"
 
 HEADERS = {
     "X-Api-Key": os.getenv("X-API-KEY")
 }
 
+def get_description(breed):
+    response = requests.get(url=DOGTIME_LINK + breed)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    description_element = soup.find(class_="entry-content")
+    description = description_element.find("p").text
+    return description
 
 app = Flask(__name__)
 
@@ -59,14 +67,18 @@ def upload_file():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        breed = predict_breed(filepath).replace('_', ' ')
+        breed = predict_breed(filepath)
+
+        breed_formatted = breed.replace('_', ' ')
 
         # Make API request with the predicted breed
         params = {"name": breed}
         response = requests.get(url=DOGS_API_ENDPOINT, params=params, headers=HEADERS)
         breed_info = response.json()[0]
 
-        return render_template('result.html', breed=breed, img_path=filename, breed_info=breed_info)
+        breed_description = get_description(breed.replace('_', '-'))
+
+        return render_template('result.html', breed=breed, img_path=filename, breed_info=breed_info, breed_description=breed_description)
     else:
         flash('File not allowed')
         return redirect(url_for('index'))
