@@ -4,6 +4,9 @@
 ### Model Data ###
 dataset/
 
+### Uploads Folde ###
+static/uploads/
+
 ### Flask ###
 instance/*
 !instance/.gitignore

@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.img-display {
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
