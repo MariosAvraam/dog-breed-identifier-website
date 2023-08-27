@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ... [your meta, title, and CSS links] -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <h2 class="text-center mb-4">Dog Breed Result</h2>
+        <div class="text-center">
+            <img src="{{ url_for('static', filename='uploads/' + img_path) }}" alt="Uploaded Dog Image" class="img-fluid mb-4">
+        </div>
+        <h3 class="text-center">Predicted Breed:
+          {{ breed }}
+        </h3>
+      </div>
+    </div>
+    <!-- Display breed information -->
+    <div class="row mt-4">
+      <div class="col-lg-6 offset-lg-3">
+        <h4>About the Breed:</h4>
+        <p><strong>Name:</strong>
+          {{ breed_info.name }}
+        </p>
+        <p><strong>Life Expectancy:</strong>
+          {{ breed_info.min_life_expectancy }} -
+          {{ breed_info.max_life_expectancy }} years
+        </p>
+        <p><strong>Height (Male):</strong>
+          {{ breed_info.min_height_male }} -
+          {{ breed_info.max_height_male }} inches
+        </p>
+        <p><strong>Height (Female):</strong>
+          {{ breed_info.min_height_female }} -
+          {{ breed_info.max_height_female }} inches
+        </p>
+        <p><strong>Weight (Male):</strong>
+          {{ breed_info.min_weight_male }} -
+          {{ breed_info.max_weight_male }} lbs
+        </p>
+        <p><strong>Weight (Female):</strong>
+          {{ breed_info.min_weight_female }} -
+          {{ breed_info.max_weight_female }} lbs
+        </p>
+        <p><strong>Energy Level:</strong>
+          {{ breed_info.energy }}/5
+        </p>
+        <p><strong>Trainability:</strong>
+          {{ breed_info.trainability }}/5
+        </p>
+        <p><strong>Good with Children:</strong>
+          {{ breed_info.good_with_children }}/5
+        </p>
+        <p><strong>Good with Strangers:</strong>
+          {{ breed_info.good_with_strangers }}/5
+        </p>
+        <p><strong>Shedding:</strong>
+          {{ breed_info.shedding }}/5
+        </p>
+        <p><strong>Grooming:</strong>
+          {{ breed_info.grooming }}/5
+        </p>
+        <p><strong>Barking:</strong>
+          {{ breed_info.barking }}/5
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-6 offset-lg-3 d-grid">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Upload Another Image</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
