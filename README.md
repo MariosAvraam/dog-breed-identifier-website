@@ -3,7 +3,9 @@
 ## Introduction
 This repository contains a Flask web application that allows users to upload images of dogs and get predictions on the breed of the dog, along with a description and some information about the breed. The application uses a deep learning model trained on a dataset of various dog breeds.
 
-![Screenshot of website](static/images/website_image.png)
+![Screenshot of website dog short text](static/images/dog_short_text_image.png)
+
+![Screenshot of website dog general information](static/images/dog_general_info_image.png)
 
 ## Prerequisites
 - Python 3.x
